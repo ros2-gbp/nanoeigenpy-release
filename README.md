@@ -1,3 +1,26 @@
+## nanoeigenpy (humble) - 0.4.0-1
+
+The packages in the `nanoeigenpy` repository were released into the `humble` distro by running `/nix/store/rrnp44mx5czg1688ynsgf6aibjf0zcq2-python3.12-bloom-0.12.0/bin/bloom-release -r humble nanoeigenpy` on `Tue, 14 Oct 2025 14:15:52 -0000`
+
+The `nanoeigenpy` package was released.
+
+Version of package(s) in repository `nanoeigenpy`:
+
+- upstream repository: https://github.com/Simple-Robotics/nanoeigenpy.git
+- release repository: https://github.com/ros2-gbp/nanoeigenpy-release.git
+- rosdistro version: `0.3.0-1`
+- old version: `0.3.0-1`
+- new version: `0.4.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `0.9.1`
+- vcstools version: `0.1.42`
+
+
 ## nanoeigenpy (rolling) - 0.3.0-1
 
 The packages in the `nanoeigenpy` repository were released into the `rolling` distro by running `/nix/store/rrnp44mx5czg1688ynsgf6aibjf0zcq2-python3.12-bloom-0.12.0/bin/bloom-release -r rolling nanoeigenpy` on `Wed, 09 Jul 2025 15:20:33 -0000`
