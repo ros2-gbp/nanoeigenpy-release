@@ -1,27 +1,6 @@
-# Copyright (C) 2008-2024 LAAS-CNRS, JRL AIST-CNRS, INRIA.
-#
-# This program is free software: you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later
-# version.
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-# details.
-#
-# You should have received a copy of the GNU General Public License along with
-# this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# .rst: .. ifmode:: user
-#
-# .. variable:: ${PROJECT_NAME}_HEADERS
-#
-# List of C++ header filenames. They will be installed automatically using
-# :command:`HEADER_INSTALL`
-#
-
-# .rst: .. ifmode:: internal
+#.rst:
+# C++ Headers
+# -----------
 #
 # .. command:: _SETUP_PROJECT_HEADER
 #
@@ -57,6 +36,30 @@
 # issue. You should at least open a ticket or send an e-mail to notify this
 # behavior.
 #
+
+# Copyright (C) 2008-2024 LAAS-CNRS, JRL AIST-CNRS, INRIA.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# .rst: .. ifmode:: user
+#
+# .. variable:: ${PROJECT_NAME}_HEADERS
+#
+# List of C++ header filenames. They will be installed automatically using
+# :command:`HEADER_INSTALL`
+#
+
 macro(_SETUP_PROJECT_HEADER)
   # Install project headers.
   if(DEFINED PROJECT_CUSTOM_HEADER_DIR)
@@ -272,9 +275,9 @@ endfunction(GENERATE_CONFIGURATION_HEADER_V2)
 #
 macro(_SETUP_PROJECT_HEADER_FINALIZE)
   # If the header list is set, install it.
-  if(DEFINED ${PROJECT_NAME}_HEADERS)
+  if(DEFINED ${PROJECT_NAME}_HEADERS AND NOT BUILD_STANDALONE_PYTHON_INTERFACE)
     HEADER_INSTALL(${${PROJECT_NAME}_HEADERS})
-  endif(DEFINED ${PROJECT_NAME}_HEADERS)
+  endif()
 endmacro(_SETUP_PROJECT_HEADER_FINALIZE)
 
 # .rst: .. ifmode:: internal
@@ -310,20 +313,11 @@ macro(HEADER_INSTALL)
 
   foreach(FILE ${FILES})
     get_filename_component(DIR "${FILE}" PATH)
-    string(REGEX REPLACE "${CMAKE_BINARY_DIR}" "" DIR "${DIR}")
-    string(REGEX REPLACE "${PROJECT_SOURCE_DIR}" "" DIR "${DIR}")
-    string(REGEX REPLACE "include(/|$)" "" DIR "${DIR}")
-    if(CMAKE_VERSION` VERSION_GREATER 3.20)
-      # workaround CMP0177
-      cmake_path(
-        SET
-        INSTALL_PATH
-        NORMALIZE
-        "${CMAKE_INSTALL_INCLUDEDIR}/${DIR}"
-      )
-    else()
-      set(INSTALL_PATH "${CMAKE_INSTALL_INCLUDEDIR}/${DIR}")
-    endif()
+    string(REPLACE "${PROJECT_BINARY_DIR}" "" DIR "${DIR}")
+    string(REPLACE "${PROJECT_SOURCE_DIR}" "" DIR "${DIR}")
+    string(REPLACE "include" "" DIR "${DIR}")
+    # workaround CMP0177
+    cmake_path(SET INSTALL_PATH NORMALIZE "${CMAKE_INSTALL_INCLUDEDIR}/${DIR}")
     install(
       FILES ${FILE}
       DESTINATION ${INSTALL_PATH}
