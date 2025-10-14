@@ -2,7 +2,7 @@
 # Copyright 2025 INRIA
 #
 
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.22)
 
 set(PROJECT_NAME nanoeigenpy)
 set(PROJECT_URL https://github.com/Simple-Robotics/nanoeigenpy)
@@ -131,7 +131,7 @@ target_include_directories(
 )
 target_link_libraries(nanoeigenpy_headers INTERFACE Eigen3::Eigen)
 
-set(${PROJECT_NAME}_SOURCES src/module.cpp src/solvers.cpp)
+set(${PROJECT_NAME}_SOURCES src/module.cpp)
 nanobind_add_module(nanoeigenpy NB_STATIC NB_SUPPRESS_WARNINGS ${nanoeigenpy_SOURCES} ${nanoeigenpy_HEADERS})
 target_link_libraries(nanoeigenpy PRIVATE nanoeigenpy_headers)
 
