@@ -2,6 +2,7 @@
 
 <p align="left">
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Linter: ruff"></a>
+  <a href="https://anaconda.org/conda-forge/nanoeigenpy"><img src="https://img.shields.io/conda/vn/conda-forge/nanoeigenpy.svg"></a>
 </p>
 
 This is a collection of tools for using Eigen together with nanobind, as a successor to the [eigenpy](https://github.com/stack-of-tasks/eigenpy) support library. Its aim is to help the transition away from Boost.Python.
@@ -121,3 +122,14 @@ cmake -S . -B build/ -DCMAKE_INSTALL_PREFIX=<your-prefix>  # prefix can be e.g. 
 cd build/
 cmake --build . --target install
 ```
+
+## Credits
+
+The following people have been involved in the development of **nanoeigenpy**:
+
+- [Wilson Jallet](https://manifoldfr.github.io/) (Inria): core developer and manager of the project
+- [Lucas Haubert](https://www.linkedin.com/in/lucas-haubert-b668a421a/) (Inria): core developer
+- [Justin Carpentier](https://jcarpent.github.io) (Inria): core developer
+- [Joris Vailant](https://github.com/jorisv) (Inria): windows support
+
+If you have taken part in the development of **nanoeigenpy**, feel free to add your name and contribution here.
