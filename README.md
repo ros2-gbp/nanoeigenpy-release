@@ -18,7 +18,7 @@ These features were finally added to eigenpy with a lot of developer effort. Thi
 
 ## Features
 
-**nanoeigenpy** provides the following features for helping you bind features from Eigen to Python:
+**nanoeigenpy** provides the following features to help you write bindings between Eigen and Python:
 
 - bindings for Eigen's [Geometry module](https://libeigen.gitlab.io/docs/group__Geometry__Module.html) - quaternions, angle-axis representations...
 - bindings for Eigen's matrix dense and sparse decompositions and solvers
@@ -28,9 +28,9 @@ These features were finally added to eigenpy with a lot of developer effort. Thi
 **nanoeigenpy** also provides bindings for Eigen's [Cholmod](https://eigen.tuxfamily.org/dox/group__CholmodSupport__Module.html) and [Apple Accelerate](https://eigen.tuxfamily.org/dox/group__AccelerateSupport__Module.html) modules.
 
 > [!NOTE]
-> The Accelerate module is only available on Eigen's master branch, and not in any official release yet (as of 3/28/2025).
->
-> Cholmod is part of the [SuiteSparse](https://github.com/DrTimothyAldenDavis/SuiteSparse) algorithms library. It can be installed standalone from [conda](https://anaconda.org/conda-forge/libcholmod).
+> The Accelerate module is available since Eigen 5.0 (Oct. 2025).
+
+Cholmod is part of the [SuiteSparse](https://github.com/DrTimothyAldenDavis/SuiteSparse) algorithms library. It can be installed standalone from [conda](https://anaconda.org/conda-forge/libcholmod).
 
 
 ## Example usage
@@ -99,6 +99,14 @@ f(quat)
 
 > [!NOTE]
 > If you have a specific scalar type (e.g. `float16`) with which you want to use `Eigen::Quaternion`, or matrix solvers, or other features in **nanoeigenpy**, you should refer to the first approach and use **nanoeigenpy** from C++ directly.
+
+Furthermore, you can check the available SIMD instruction sets from the Python extension module itself:
+
+```python
+>>> import nanoeigenpy
+>>> print(nanoeigenpy.SimdInstructionSetsInUse())
+>>> SSE, SSE2  # no optimizations
+```
 
 
 ## Installation
