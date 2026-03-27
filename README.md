@@ -1,3 +1,26 @@
+## nanoeigenpy (kilted) - 0.5.0-1
+
+The packages in the `nanoeigenpy` repository were released into the `kilted` distro by running `/nix/store/rhf364g29a4h0nwdhf8lv17y9jh0i5gj-python3.13-bloom-0.13.0/bin/bloom-release -r kilted nanoeigenpy` on `Fri, 27 Mar 2026 13:53:50 -0000`
+
+The `nanoeigenpy` package was released.
+
+Version of package(s) in repository `nanoeigenpy`:
+
+- upstream repository: https://github.com/Simple-Robotics/nanoeigenpy.git
+- release repository: https://github.com/ros2-gbp/nanoeigenpy-release.git
+- rosdistro version: `0.4.0-1`
+- old version: `0.4.0-1`
+- new version: `0.5.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## nanoeigenpy (rolling) - 0.5.0-1
 
 The packages in the `nanoeigenpy` repository were released into the `rolling` distro by running `/nix/store/rhf364g29a4h0nwdhf8lv17y9jh0i5gj-python3.13-bloom-0.13.0/bin/bloom-release -r rolling nanoeigenpy` on `Fri, 27 Mar 2026 13:51:49 -0000`
