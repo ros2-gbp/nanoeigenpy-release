@@ -112,7 +112,10 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
   OUTPUT_VARIABLE nanobind_ROOT
 )
-find_package(nanobind CONFIG REQUIRED)
+find_package(nanobind 2.5.0 CONFIG)
+if(NOT nanobind_FOUND)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/nanobind)
+endif()
 
 # Setup main targets
 file(
@@ -167,10 +170,15 @@ endif(BUILD_WITH_CHOLMOD_SUPPORT)
 
 # Apple accelerate
 if(BUILD_WITH_ACCELERATE_SUPPORT)
-  if(NOT ${Eigen3_VERSION} VERSION_GREATER_EQUAL "3.4.90")
+  if(NOT ${EIGEN_VERSION_NUMBER} VERSION_GREATER_EQUAL "5.0.0")
     message(
       FATAL_ERROR
-      "Your version of Eigen is too low. Should be at least 3.4.90. Current version is ${Eigen3_VERSION}."
+      "Your version of Eigen is too low. Should be at least 5.0.0. Current version is ${EIGEN_VERSION_NUMBER}."
+    )
+  else()
+    message(
+      STATUS
+      "Building with Accelerate support - Eigen version detected ${EIGEN_VERSION_NUMBER}"
     )
   endif()
 
@@ -181,13 +189,11 @@ if(BUILD_WITH_ACCELERATE_SUPPORT)
   )
   find_package(Accelerate REQUIRED)
   message(STATUS "Build with Accelerate support framework.")
+  target_link_libraries(nanoeigenpy PRIVATE Accelerate)
   target_compile_definitions(
     nanoeigenpy_headers
     INTERFACE -DNANOEIGENPY_WITH_ACCELERATE_SUPPORT
   )
-endif(BUILD_WITH_ACCELERATE_SUPPORT)
-
-if(BUILD_WITH_ACCELERATE_SUPPORT)
   file(
     GLOB ${PROJECT_NAME}_DECOMPOSITIONS_SPARSE_ACCELERATE_HEADERS
     include/nanoeigenpy/decompositions/sparse/accelerate/*.hpp
@@ -204,10 +210,6 @@ else()
     REGEX "include/nanoeigenpy/decompositions/sparse/accelerate/.*"
   )
 endif(BUILD_WITH_ACCELERATE_SUPPORT)
-
-if(BUILD_WITH_ACCELERATE_SUPPORT)
-  target_link_libraries(nanoeigenpy PRIVATE Accelerate)
-endif()
 
 if(BUILD_TESTING)
   add_subdirectory(tests)
@@ -241,8 +243,5 @@ install(
 
 ADD_HEADER_GROUP(${PROJECT_NAME}_HEADERS)
 ADD_SOURCE_GROUP(${PROJECT_NAME}_SOURCES)
-
-# Install ROS package.xml
-install(FILES package.xml DESTINATION share/${PROJECT_NAME})
 
 SETUP_PROJECT_FINALIZE()
